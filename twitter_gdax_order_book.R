@@ -46,7 +46,7 @@ bids_in_range <- filter(bids, Price >= 0.95 * max_bid)
 asks_in_range <- filter(asks, Price <= 1.05 * min_ask)
 
 # Graph orderbook
-output <- '~/Desktop/Current_Order_Book.png'
+output <- '/home/michael/dev/twitter-gdax-orders/Current_Order_Book.png'
 png(filename = output, width = 1600, height = 800, res = 200)
 ggplot(bids_in_range) + 
     geom_area(aes(x = Price, y = Cum_Volume), color = '#88F56E', fill = '#88F56E', alpha = 0.25) +
@@ -80,7 +80,7 @@ liquidation_volume <- comma(sum(bids$Volume))
 ################################################################################
 
 # Set up Twitter API
-source('~/Desktop/twitter_creds.R')
+source('~/twitter_creds.R')
 setup_twitter_oauth(consumer_key = gdax_order_book$consumer_key,
                     consumer_secret = gdax_order_book$consumer_secret,
                     access_token = gdax_order_book$access_token,
@@ -92,7 +92,7 @@ time <- Sys.time()
 tweet_text <- 
 paste0('Current Bitcoin Price: ', current_price, '
 Bid-Ask Spread: ', bid_ask_spread, '
-Bitcoin Sale Required to Liquidate Order Book: ', liquidation_volume)
+Number of Bitcoin (Sales) Required to Liquidate Order Book: ', liquidation_volume)
 
 # Send Tweet
 tweet(tweet_text, mediaPath = output)
