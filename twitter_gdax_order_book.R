@@ -80,7 +80,7 @@ liquidation_volume <- comma(sum(bids$Volume))
 ################################################################################
 
 # Set up Twitter API
-source('~/twitter_creds.R')
+source('/home/michael/twitter_creds.R')
 setup_twitter_oauth(consumer_key = gdax_order_book$consumer_key,
                     consumer_secret = gdax_order_book$consumer_secret,
                     access_token = gdax_order_book$access_token,
@@ -92,7 +92,8 @@ time <- Sys.time()
 tweet_text <- 
 paste0('Current Bitcoin Price: ', current_price, '
 Bid-Ask Spread: ', bid_ask_spread, '
-Number of Bitcoin (Sales) Required to Liquidate Order Book: ', liquidation_volume)
+Number of Bitcoin (Sales) Required to Liquidate Order Book: ', liquidation_volume, '
+$btc $btcusd')
 
 # Send Tweet
 tweet(tweet_text, mediaPath = output)
